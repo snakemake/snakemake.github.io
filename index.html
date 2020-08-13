@@ -131,7 +131,9 @@
 							<div class="text-block">
 								<h2><strong><font color="#039475">Modularization</font></strong></h2>
 								<p class="lead">
-									Rapidly create and employ <span id="activHover" class="wrap underline">re-usable tool wrappers</span> and split your data analysis into well-separated modules.
+									Rapidly implement analysis steps via direct <span id="activHover" class="script underline">script</span> and <span id="activHover" class="underline">jupyter notebook</span> integration.
+									Easily create and employ <span id="activHover" class="wrap underline">re-usable tool wrappers</span> and split your data analysis into well-separated modules.
+									
 								</p>
 								
 							</div>
@@ -217,9 +219,9 @@
 								    	"docker://faizanbashir/python-datascience:3.6"
 	                                    </span>
 	                                </span>
-	                                <span class="code-input">    
+	                                <span class="code-input script_hl n1Script">    
 	                                script:
-								    	<span class="code-data">
+								    	<span class="code-data script_hl">
 								    	"scripts/plot-hist.py"
 	                                    </span>
 	                                </span>
@@ -426,6 +428,14 @@
 	      $( ".cont_hl" ).removeClass('hover_hl');
 	       $( "connection" ).css('border','none'); 
 	   });
+	   	 $( ".script" ).hover(function() {
+		   $( ".script_hl" ).addClass('hover_hl');
+		    $(".script, .n1Script").connections(); 
+		 },
+	    function(){
+	      $( ".script_hl" ).removeClass('hover_hl');
+	       $( "connection" ).css('border','none'); 
+	   });
 	     $( ".wrap" ).hover(function() {
 		   $( ".wrap_hl" ).addClass('hover_hl');
 		    $(".wrap, .n1Wrap").connections(); 
@@ -522,6 +532,23 @@ $('.conda').on('click', function () {
 						       $(".connection").animate({border: "none"}, 2000);
 						       $( "connection" ).css('position','static');
 						}						       
+	});
+
+$('.script').on('click', function () {       
+
+					     $('.script_hl').toggleClass('hover_hl');
+                        if ($('.script_hl').hasClass( 'hover_hl' )) {
+                        	 $('.script_hl').addClass('hover_hl');
+ 			 				 $(".wrap, .n1Wrap").connections(); 
+
+
+                            
+                        } else {
+                        	    $( ".script_hl" ).removeClass('hover_hl'); 
+						       $(".connection").animate({border: "none"}, 2000);
+						       $( "connection" ).css('position','static');
+						}						       
+
 	});
 
 $('.wrap').on('click', function () {       
