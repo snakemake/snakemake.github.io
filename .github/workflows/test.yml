@@ -22,4 +22,4 @@ jobs:
             
             - name: Build page
               run: |
-                snakemake -c1
+                snakemake -c1 --software-deployment-method conda

@@ -10,6 +10,8 @@ rule build_css:
         css="src/style.css",
     output:
         "build/style.css",
+    conda:
+        "envs/nodejs.yaml"
     shell:
         "npx tailwindcss -i {input.css} -o {output}"
 
@@ -19,6 +21,8 @@ rule build_html:
         config="config.yaml",
     output:
         "build/index.html"
+    conda:
+        "envs/ytml.yaml"
     shell:
         "ytml src build {input.config} index.ytml.yaml"
 
