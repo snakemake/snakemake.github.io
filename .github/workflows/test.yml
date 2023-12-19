@@ -1,0 +1,23 @@
+on:
+    pull_request:
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash -el {0}
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: conda-incubator/setup-miniconda@v3
+              with:
+                python-version: 3.11
+                mamba-version: "*"
+                channels: conda-forge,nodefaults
+                activate-environment: test-env
+                environment-file: environment.yml
+            
+            - name: Build page
+              run: |
+                snakemake -c1

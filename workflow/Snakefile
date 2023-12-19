@@ -1,0 +1,31 @@
+rule all:
+    input:
+        "build/index.html",
+        "build/style.css",
+
+rule build_css:
+    input:
+        "build/index.html",
+        "build/hero.png",
+        css="src/style.css",
+    output:
+        "build/style.css",
+    shell:
+        "npx tailwindcss -i {input.css} -o {output}"
+
+
+rule build_html:
+    input:
+        config="config.yaml",
+    output:
+        "build/index.html"
+    shell:
+        "ytml src build {input.config} index.ytml.yaml"
+
+rule copy_asset:
+    input:
+        "src/{asset}"
+    output:
+        "build/{asset}"
+    shell:
+        "cp {input} {output}"

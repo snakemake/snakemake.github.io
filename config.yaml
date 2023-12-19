@@ -1,0 +1,151 @@
+header:
+  logo: logo-snake.svg
+  name: Snakemake
+  links:
+    - text: Docs
+      url: https://snakemake.readthedocs.io
+    - text: Github
+      url: https://github.com/snakemake
+    - text: Mastodon
+      url: https://fosstodon.org/@johanneskoester
+    - text: X
+      url: https://x.com/johanneskoester
+
+hero:
+  logo: logo_light.svg
+  statements:
+    - "&gt;10 new citations per week ([old](https://badge.dimensions.ai/details/id/pub.1018944052) + [new paper](https://badge.dimensions.ai/details/id/pub.1137313608))"
+    - "[&gt;920,000 downloads](https://anaconda.org/bioconda/snakemake)"
+    - "[Open source](https://github.com/snakemake), [MIT licensed](https://github.com/snakemake/snakemake/blob/main/LICENSE.md)"
+  links:
+    - url: https://doi.org/10.12688/f1000research.29032.2
+      text: Read the paper
+    - url: https://snakemake.readthedocs.io
+      text: Read the docs
+    - url: https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html
+      text: Tutorial
+    - url: https://snakemake.github.io/snakemake-workflow-catalog
+      text: Workflow catalog
+    
+
+features:
+  - title: Readability and automation
+    desc: |
+      With Snakemake, data analysis workflows are defined via an easy to read, adaptable, yet powerful specification language on top of Python.
+      Steps are defined by "rules", which denote how to generate a set of output files from a set of input files (e.g. using a shell command).
+      Wildcards (in curly braces) provide generalization. Dependencies between rules are determined automatically.
+    code: |
+      !rule! select_by_country:
+          !input!:
+              "data/worldcitiespop.csv"
+          !output!:
+              "by-country/{{country}}.csv"
+          !shell!:
+              "xsv search -s Country '{{wildcards.country}}' "
+              "{{input}} > {{output}}"
+
+  - title: Portability
+    desc: |
+       By integration with the [Conda package manager](https://conda.io) and [containers](https://apptainer.org), all
+       software dependencies of each workflow step are automatically deployed upon execution. 
+    code: |
+      !rule! select_by_country:
+          !input!:
+              "data/worldcitiespop.csv"
+          !output!:
+              "by-country/{{country}}.csv"
+          %conda%:
+              "envs/xsv.yaml"
+          !shell!:
+              "xsv search -s Country '{{wildcards.country}}' "
+              "{{input}} > {{output}}"
+
+  - title: Scripting integration
+    desc: |
+      Rapidly implement analysis steps via direct
+      [script](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#external-scripts) and 
+      [jupyter notebook integration](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#jupyter-notebook-integration)
+      supporting Python, R, Julia, Rust, Bash, without requiring any boilerplate code.
+    code: |
+      !rule! select_by_country:
+          !input!:
+              "data/worldcitiespop.csv"
+          !output!:
+              "by-country/{{country}}.csv"
+          %script%:
+              "scripts/select_by_country.R"
+
+  - title: Modularization
+    desc: |
+      Easily create and employ re-usable
+      [tool or library wrappers](https://snakemake-wrappers.readthedocs.io), 
+      split your data analysis into well-separated
+      [modules](https://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html),
+      and compose multi-modal analyses by easily [combining entire workflows](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#use-with-modules) various sources.
+    code: |
+      !rule! convert_to_pdf:
+          !input!:
+              "{prefix}.svg"
+          !output!:
+              "{prefix}.pdf"
+          %wrapper%:
+              "0.47.0/utils/cairosvg"
+
+  - title: '"Turing completeness"'
+    desc: |
+      Being a syntactical extension of [Python](https://python.org), you can implement arbitrary logic beyond the plain definition of rules.
+      Rules can be generated conditionally, arbitrary Python logic can be used to perform aggregations, configuration and metadata can be obtained and postprocessed in any required way.
+    code: |
+      !def! %get_data%(wildcards):
+          # use arbitrary Python logic to
+          # aggregate over the required input files
+          !return! ...
+
+      !rule! plot_histogram:
+          !input!:
+              %get_data%
+          !output!:
+              "plots/.hist.svg"
+          !script!:
+              "scripts/plot-hist.py"
+
+  - title: Transparency and data provenance
+    desc: |
+      Automatic, interactive, self-contained [reports](https://snakemake.readthedocs.io/en/stable/snakefiles/reporting.html) ensure full transparency from results down to used steps, parameters, code, and software.
+      The reports can moreover contain embedded results (from images, to PDFs and even [interactive HTML](https://github.com/datavzrd/datavzrd)) enabling a comprehensive reporting that combines analysis results with data provenance information.
+    img: report.png
+    url: https://snakemake.github.io/resources/report.html
+
+  - title: Scalability
+    desc: |
+       Workflows [scale](https://snakemake.readthedocs.io/en/stable/executing/cli.html) seamlessly from single to multicore, clusters or the cloud, without modification of the workflow definition and automatic avoidance of redundant computations.
+    img: server.jpg
+    url: https://snakemake.readthedocs.io/en/stable/executing/cli.html
+
+  - title: Configurability
+    desc: |
+      Snakemake is extremely flexible and configurable.
+      Numerous [options](https://snakemake.readthedocs.io/en/stable/executing/cli.html#all-options) allow adapt the behavior to the needs of the data analysis at hand and the underlying infrastructure.
+      Options can be provided via the command line interface or persisted via system-wide, user-specific, and workflow specific [profiles](https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles).
+    code: |
+      !executor!: slurm
+      !software-deployment-method!:
+        - conda
+      !latency-wait!: 60
+      !default-storage-provider!: fs
+      !shared-fs-usage!:
+        - persistence
+        - software-deployment
+        - sources
+        - source-cache
+      !local-storage-prefix!:
+        /local/work/$USER/snakemake-scratch
+
+  - title: Extensibility
+    desc: |
+      Snakemake has a powerful [plugin system](https://snakemake.github.io/snakemake-plugin-catalog/index.html) that allows to extend various functionalities with alternative implementations.
+      Via stable and well-defined interfaces, plugins can evolve independently of Snakemake, and mutual update requirements are minimized.
+      Currently, execution backends and remote storage support is implemented via plugins.
+      In the future, we will extend this to other areas, such as workflow scheduling, reporting, software deployment, and more.
+    img: plugins.png
+    url: https://snakemake.github.io/snakemake-plugin-catalog/index.html
