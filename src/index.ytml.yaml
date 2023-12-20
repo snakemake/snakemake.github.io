@@ -1,0 +1,147 @@
+__use_yte__: true
+
+__definitions__:
+  - import re
+  - |
+    def heroicon(name):
+      return f"https://raw.githubusercontent.com/tailwindlabs/heroicons/master/src/24/outline/{name}.svg"
+  - |
+    def hlt(string):
+      def emerald(name, brightness=500):
+        return f"<span class='text-emerald-{brightness}'>{name}</span>"
+      string = re.sub(r"!([a-zA-Z0-9_-]+)!", emerald(r"\1", 500), string)
+      string = re.sub(r"%([a-zA-Z0-9_-]+)%", emerald(r"\1", 200), string)
+      return string
+
+
+
+html:
+  class: dark
+  lang: en
+  content:
+    head:
+      title: Snakemake - a framework for reproducible data analysis
+      link:
+        rel: stylesheet
+        href: style.css
+        content: null
+      script:
+        src:
+          file:
+            path: dark_mode.js
+        crossorigin: anonymous
+        content: null
+    body:
+      class: antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900
+      content:
+        header:
+          class: bg-slate-800
+          content:
+            - div:
+                class: flex justify-between p-4
+                content:
+                  - div:
+                      content:
+                        a:
+                          href: "#"
+                          content:
+                            ul:
+                              class: flex items-center gap-x-4
+                              content:
+                                - li:
+                                    file:
+                                      path: ?header["logo"]
+                                      class: "w-8 h-8"
+                                      inline: true
+                                - li:
+                                    span:
+                                      class: font-bold
+                                      content: ?header["name"]
+                  - div:
+                      class: flex items-center
+                      content:
+                        nav:
+                          ul:
+                            class: flex items-center gap-x-8
+                            content:
+                              ?for item in header["links"]:
+                                - li:
+                                    a:
+                                      href: ?item["url"]
+                                      class: "text-sm font-medium text-slate-300 hover:text-white hover:bg-emerald-500 rounded p-2 transition"
+                                      content: ?item["text"]
+
+            - div:
+                class: py-12 mx-auto w-fit max-w-3xl
+                content:
+                  - file:
+                      path: ?hero["logo"]
+                      inline: true
+                      class: "mt-6 mx-auto mb-5"
+                      style: "width: 500px"
+                  - ul:
+                      class: mt-6 text-lg max-w-3xl text-slate-900 dark:text-white
+                      content:
+                        ?for item in hero["statements"]:
+                          - li:
+                              class: prose prose-a:text-white hover:prose-a:text-emerald-500 text-white prose-a:no-underline
+                              content:
+                                markdown: ?item
+                  - div:
+                      class: mt-6 max-w-3xl sm:mt-10 flex space-x-6 text-sm
+                      content:
+                        ?for item in hero["links"]:
+                          - a:
+                              href: ?item["url"]
+                              class: "bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded"
+                              content: ?item["text"]
+            - div:
+                class: bg-gradient-to-r from-emerald-800 via-slate-900 to-emerald-800 h-1
+                content: null
+
+        section:
+          content:
+            div:
+              class: px-8 w-1/2 mx-auto mt-20 sm:mt-32 md:mt-40 flex flex-col gap-20
+              content:
+                ?for i, item in enumerate(features):
+                  - div:
+                      class: md:flex md:flex-row md:space-x-4 md:justify-center md:items-center gap-10
+                      content:
+                        - div:
+                            class:
+                              ?if i % 2 == 0:
+                                order-first
+                              ?else:
+                                order-last
+                            content:
+                              - h1:
+                                  class: text-lg font-bold text-slate-900 dark:text-white
+                                  content: ?item["title"]
+                              - span:
+                                  class: prose dark:prose-invert
+                                  content:
+                                    markdown: ?item["desc"]
+                        - ?if "code" in item:
+                            code:
+                              class: prose-code dark:prose-invert whitespace-pre
+                              content: ?hlt(item["code"])
+                          ?else:
+                            div:
+                              a:
+                                href: ?item["url"]
+                                target: _blank
+                                content:
+                                  img:
+                                    src:
+                                      file: 
+                                        path: ?item["img"]
+                                    class: "rounded-lg"
+                                    style: "width: 200px; max-width: 100vw;"
+                                    content: null
+
+                  - div:
+                      class: bg-gradient-to-r from-slate-900 via-emerald-800  to-slate-900 h-0.5
+                      content: null
+              
+

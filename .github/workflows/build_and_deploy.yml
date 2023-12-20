@@ -1,0 +1,43 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    defaults:
+      run:
+        shell: bash -el {0}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: 3.11
+          mamba-version: "*"
+          channels: conda-forge,nodefaults
+          activate-environment: test-env
+          environment-file: environment.yml
+
+      - name: Build page
+        run: |
+          snakemake -c1 --software-deployment-method conda
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
