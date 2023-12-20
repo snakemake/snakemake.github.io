@@ -102,7 +102,7 @@ html:
         section:
           content:
             div:
-              class: px-8 w-1/2 mx-auto mt-20 sm:mt-32 md:mt-40 flex flex-col gap-20
+              class: px-8 max-w-screen-lg mx-auto mt-20 sm:mt-32 md:mt-40 flex flex-col gap-20
               content:
                 ?for i, item in enumerate(features):
                   - div:
