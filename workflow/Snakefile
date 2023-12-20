@@ -2,6 +2,8 @@ rule all:
     input:
         "build/index.html",
         "build/style.css",
+        "build/resources/report.html",
+
 
 rule build_css:
     input:
@@ -20,16 +22,18 @@ rule build_html:
     input:
         config="config.yaml",
     output:
-        "build/index.html"
+        "build/index.html",
     conda:
         "envs/ytml.yaml"
     shell:
         "ytml src build {input.config} index.ytml.yaml"
 
+
 rule copy_asset:
     input:
-        "src/{asset}"
+        "src/{asset}",
     output:
-        "build/{asset}"
+        "build/{asset}",
     shell:
+        "mkdir -p $(dirname {output}); "
         "cp {input} {output}"
