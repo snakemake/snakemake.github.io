@@ -22,5 +22,4 @@ jobs:
             
             - name: Build page
               run: |
-                npm install
                 snakemake -c1 --software-deployment-method conda

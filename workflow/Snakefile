@@ -13,7 +13,7 @@ rule build_css:
     conda:
         "envs/nodejs.yaml"
     shell:
-        "npx tailwindcss -i {input.css} -o {output}"
+        "npm install; npx tailwindcss -i {input.css} -o {output}"
 
 
 rule build_html:
