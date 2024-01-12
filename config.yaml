@@ -39,10 +39,10 @@ features:
           !input!:
               "data/worldcitiespop.csv"
           !output!:
-              "by-country/{{country}}.csv"
+              "by-country/{country}.csv"
           !shell!:
-              "xsv search -s Country '{{wildcards.country}}' "
-              "{{input}} > {{output}}"
+              "xsv search -s Country '{wildcards.country}' "
+              "{input} > {output}"
 
   - title: Portability
     desc: |
@@ -53,12 +53,12 @@ features:
           !input!:
               "data/worldcitiespop.csv"
           !output!:
-              "by-country/{{country}}.csv"
+              "by-country/{country}.csv"
           %conda%:
               "envs/xsv.yaml"
           !shell!:
-              "xsv search -s Country '{{wildcards.country}}' "
-              "{{input}} > {{output}}"
+              "xsv search -s Country '{wildcards.country}' "
+              "{input} > {output}"
 
   - title: Scripting integration
     desc: |
@@ -71,7 +71,7 @@ features:
           !input!:
               "data/worldcitiespop.csv"
           !output!:
-              "by-country/{{country}}.csv"
+              "by-country/{country}.csv"
           %script%:
               "scripts/select_by_country.R"
 
