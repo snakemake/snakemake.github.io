@@ -3,7 +3,7 @@ project:
   copyright: 2024, The Snakemake Team
   authors: Johannes Koester
 
-color: orange
+color: emerald
 logo:
   dark: logo-snake.svg
   light: logo-snake.svg
