@@ -10,16 +10,11 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: conda-incubator/setup-miniconda@v3
+      - name: locosopa
+        uses: koesterlab/locosopa@main
         with:
-          python-version: 3.11
-          mamba-version: "*"
-          channels: conda-forge,nodefaults
-          activate-environment: test-env
-          environment-file: environment.yml
-
-      - name: Build page
-        run: |
-          snakemake -c1 --software-deployment-method conda
+          config: src/config.yaml
+          path: build
+          deploy: "false"

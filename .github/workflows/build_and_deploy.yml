@@ -22,27 +22,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - uses: conda-incubator/setup-miniconda@v3
+      
+      - name: locosopa
+        uses: koesterlab/locosopa@main
         with:
-          python-version: 3.11
-          mamba-version: "*"
-          channels: conda-forge,nodefaults
-          activate-environment: test-env
-          environment-file: environment.yml
-
-      - name: Build page
-        run: |
-          snakemake -c1 --software-deployment-method conda
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
+          config: config.yaml
           path: build
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
