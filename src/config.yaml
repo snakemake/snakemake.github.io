@@ -15,6 +15,9 @@ repo:
       - github-actions[bot]
       - dependabot[bot]
 
+assets:
+  - resources/report.html
+
 header:
   links:
     - text: Docs
