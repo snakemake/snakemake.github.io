@@ -1,6 +1,24 @@
-header:
-  logo: logo-snake.svg
+project:
   name: Snakemake
+  copyright: 2024, The Snakemake Team
+  authors: Johannes Koester
+
+color: emerald
+logo:
+  dark: logo-snake.svg
+  light: logo-snake.svg
+
+repo: 
+  name: snakemake/snakemake
+  contributors:
+    skip:
+      - github-actions[bot]
+      - dependabot[bot]
+
+assets:
+  - resources/report.html
+
+header:
   links:
     - text: Docs
       url: https://snakemake.readthedocs.io
@@ -12,7 +30,7 @@ header:
       url: https://x.com/johanneskoester
 
 hero:
-  logo: logo_light.svg
+  img: logo_light.svg
   statements:
     - "&gt;11 new citations per week ([old](https://badge.dimensions.ai/details/id/pub.1018944052) + [new paper](https://badge.dimensions.ai/details/id/pub.1137313608))"
     - "[&gt;920,000 downloads](https://anaconda.org/bioconda/snakemake)"
@@ -26,7 +44,6 @@ hero:
       text: Tutorial
     - url: https://snakemake.github.io/snakemake-workflow-catalog
       text: Workflow catalog
-    
 
 features:
   - title: Readability and automation
