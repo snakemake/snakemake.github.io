@@ -122,9 +122,46 @@ features:
           !input!:
               %get_data%
           !output!:
-              "plots/.hist.svg"
+              "plots/hist.svg"
           !script!:
               "scripts/plot-hist.py"
+
+  - title: Human Readability
+    desc: |
+      The logic of production workflows can become complex by involving lots of lookups and dynamic decisions.
+      Snakemake offers [semantic helper functions](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#semantic-helper-functions) for lookups, branching and aggregation that avoid the need for plain Python code as shown above, and 
+      allow to express complex logic in a human-readable and self-contained way.
+    code: |
+      !rule! plot_histogram:
+          !input!:
+              %branch%(
+                  %lookup%(dpath="histogram/somedata", within=config),
+                  then="data/somedata.txt",
+                  otherwise="data/someotherdata.txt"
+              )
+          !output!:
+              "plots/hist.svg"
+          !script!:
+              "scripts/plot-hist.py"
+
+  - title: Dynamic workflows
+    desc: |
+      Snakemake allows to define workflows that are dynamically updated at runtime.
+      By defining so-called [checkpoints](https://snakemake.readthedocs.io/en/latest/snakefiles/rules.html#data-dependent-conditional-execution),
+      the workflow can be dynamically adapted at runtime.
+      Further, input can be provided as [Python queues](https://snakemake.readthedocs.io/en/latest/snakefiles/rules.html#continuously-updated-input), thereby enabling a workflow to continuously receive new input data (e.g. while a certain measurement is conducted).
+    code: |
+      !rule! all:
+          !input!:
+              %from_queue%(all_results, finish_sentinel=...)
+      
+      !checkpoint! somestep:
+          %input%:
+              "samples/{sample}.txt"
+          %output%:
+              "somestep/{sample}.txt"
+          %shell%:
+              "somecommand {input} > {output}"
 
   - title: Transparency and data provenance
     desc: |
