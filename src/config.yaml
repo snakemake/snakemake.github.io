@@ -155,12 +155,12 @@ features:
           !input!:
               %from_queue%(all_results, finish_sentinel=...)
       
-      !checkpoint! somestep:
-          %input%:
+      %checkpoint% somestep:
+          !input!:
               "samples/{sample}.txt"
-          %output%:
+          !output!:
               "somestep/{sample}.txt"
-          %shell%:
+          !shell!:
               "somecommand {input} > {output}"
 
   - title: Transparency and data provenance
