@@ -136,8 +136,8 @@ features:
           !input!:
               %branch%(
                   %lookup%(dpath="histogram/somedata", within=config),
-                  then="data/somedata.txt",
-                  otherwise="data/someotherdata.txt"
+                  %then%="data/somedata.txt",
+                  %otherwise%="data/someotherdata.txt"
               )
           !output!:
               "plots/hist.svg"
