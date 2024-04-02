@@ -33,7 +33,7 @@ hero:
   img: logo_light.svg
   statements:
     - "&gt;11 new citations per week ([old](https://badge.dimensions.ai/details/id/pub.1018944052) + [new paper](https://badge.dimensions.ai/details/id/pub.1137313608))"
-    - "[&gt;920,000 downloads](https://anaconda.org/bioconda/snakemake)"
+    - "[&gt;1,000,000 downloads](https://anaconda.org/bioconda/snakemake)"
     - "[Open source](https://github.com/snakemake), [MIT licensed](https://github.com/snakemake/snakemake/blob/main/LICENSE.md)"
   links:
     - url: https://doi.org/10.12688/f1000research.29032.2
