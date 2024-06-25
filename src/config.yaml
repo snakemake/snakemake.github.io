@@ -38,7 +38,7 @@ hero:
     - "&gt;11 new citations per week ([old](https://badge.dimensions.ai/details/id/pub.1018944052) + [new paper](https://badge.dimensions.ai/details/id/pub.1137313608))"
     - "[&gt;1,000,000 downloads](https://anaconda.org/bioconda/snakemake)"
     - "[Open source](https://github.com/snakemake), [MIT licensed](https://github.com/snakemake/snakemake/blob/main/LICENSE.md)"
-    - '[<img src="numfocus.svg" alt="NumFOCUS" style="height: 1em; vertical-align: bottom; display: inline;"> sponsored project](https://numfocus.org/sponsored-projects)'
+    - '[<img src="numfocus.svg" alt="NumFOCUS" style="height: 1em; vertical-align: middle; display: inline; margin: unset"> sponsored project](https://numfocus.org/sponsored-projects)'
   links:
     - url: https://doi.org/10.12688/f1000research.29032.2
       text: Read the paper
