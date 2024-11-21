@@ -27,8 +27,8 @@ header:
       url: https://github.com/snakemake
     - text: Mastodon
       url: https://fosstodon.org/@johanneskoester
-    - text: X
-      url: https://x.com/johanneskoester
+    - text: Bluesky
+      url: https://bsky.app/profile/johanneskoester.bsky.social
 
 hero:
   img:
