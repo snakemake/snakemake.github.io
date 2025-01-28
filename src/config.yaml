@@ -36,7 +36,7 @@ hero:
     light: logo_dark.svg
   statements:
     - "&gt;14 new citations per week ([old](https://badge.dimensions.ai/details/id/pub.1018944052) + [new paper](https://badge.dimensions.ai/details/id/pub.1137313608))"
-    - "[&gt;1,000,000 downloads](https://anaconda.org/bioconda/snakemake)"
+    - "[&gt;1,200,000 downloads](https://anaconda.org/bioconda/snakemake)"
     - "[Open source](https://github.com/snakemake), [MIT licensed](https://github.com/snakemake/snakemake/blob/main/LICENSE.md)"
     - '[<img src="numfocus.svg" alt="NumFOCUS" style="height: 1em; vertical-align: middle; display: inline; margin: unset"> affiliated project](https://numfocus.org/affiliated-projects)'
     - 'Join the [Snakemake hackathon 2025](https://indico.cern.ch/event/snakemake2025) at <span style="color: #255eb1">CERN<span>!'
