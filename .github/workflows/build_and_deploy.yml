@@ -26,6 +26,56 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Download and setup Fediwall
+        run: |
+          # Download latest fediwall release
+          curl -L https://github.com/defnull/fediwall/releases/latest/download/fediwall.zip -o fediwall.zip
+          unzip fediwall.zip -d fediwall-temp
+          
+          # Create fediwall directory in build
+          mkdir -p build/fediwall
+          cp -r fediwall-temp/* build/fediwall/
+          
+          # Create custom config for Snakemake hashtag
+          cat > build/fediwall/wall-config.json << 'EOF'
+          {
+            "title": "Snakemake Community Wall",
+            "subtitle": "Follow the #Snakemake hashtag on the Fediverse",
+            "hashtags": [
+              "snakemake",
+              "SnakemakeHackathon",
+              "SnakemakeHackathon2025",
+              "SnakemakeHackathon2026",
+              "SnakemakeHackathon2027",
+              "SnakemakeWrapper",
+              "SnakemakeWrappers",
+              "Snakemake_Wrapper",
+              "Snakemake_Wrappers"
+            ],
+            "accounts": [],
+            "servers": [
+              "mastodon.social",
+              "fosstodon.org",
+              "fediscience.org",
+              "scholar.social",
+              "genomic.social"
+            ],
+            "theme": "auto",
+            "autorefresh": 30,
+            "showboosts": true,
+            "showreplies": false,
+            "showsensitive": false
+          }
+          EOF
+          
+          # Clean up
+          rm -rf fediwall-temp fediwall.zip
+      
       - name: locosopa
         uses: koesterlab/locosopa@main
         with:

@@ -23,6 +23,8 @@ header:
   links:
     - text: Docs
       url: https://snakemake.readthedocs.io
+    - text: Community Wall
+      url: /fediwall/
     - text: Github
       url: https://github.com/snakemake
     - text: Mastodon
