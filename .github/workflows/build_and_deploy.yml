@@ -33,9 +33,22 @@ jobs:
       
       - name: Download and setup Fediwall
         run: |
-          # Download latest fediwall release
-          curl -L https://github.com/defnull/fediwall/releases/latest/download/fediwall.zip -o fediwall.zip
-          unzip fediwall.zip -d fediwall-temp
+          # Download specific fediwall release with checksum verification
+          FEDI_WALL_VERSION="v1.4.0"  # bump deliberately
+          FEDI_WALL_SHA256="9aeca19df37e1c872efa0e8047660eb15cfe24f8b14e5c198a20d966e7e456bc"
+          curl -fL "https://github.com/defnull/fediwall/releases/download/${FEDI_WALL_VERSION}/fediwall-1.4.0.tgz" -o fediwall.tgz
+          
+          # Double-check with explicit verification
+          ACTUAL_SHA256=$(sha256sum fediwall.tgz | cut -d' ' -f1)
+          if [ "${ACTUAL_SHA256}" != "${FEDI_WALL_SHA256}" ]; then
+            echo "ERROR: SHA256 checksum verification failed!"
+            echo "Expected: ${FEDI_WALL_SHA256}"
+            echo "Actual:   ${ACTUAL_SHA256}"
+            exit 1
+          fi
+          echo "✓ SHA256 checksum verification passed"
+          mkdir -p fediwall-temp
+          tar -xzf fediwall.tgz -C fediwall-temp --strip-components=1
           
           # Create fediwall directory in build
           mkdir -p build/fediwall
@@ -74,7 +87,7 @@ jobs:
           EOF
           
           # Clean up
-          rm -rf fediwall-temp fediwall.zip
+          rm -rf fediwall-temp fediwall.tgz
       
       - name: locosopa
         uses: koesterlab/locosopa@main
