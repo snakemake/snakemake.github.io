@@ -39,16 +39,20 @@ hero:
     - "[&gt;1,200,000 downloads](https://anaconda.org/bioconda/snakemake)"
     - "[Open source](https://github.com/snakemake), [MIT licensed](https://github.com/snakemake/snakemake/blob/main/LICENSE.md)"
     - '[<img src="numfocus.svg" alt="NumFOCUS" style="height: 1em; vertical-align: middle; display: inline; margin: unset"> affiliated project](https://numfocus.org/affiliated-projects)'
-    - 'The [Snakemake hackathon 2026](https://indico.cern.ch/e/snakemake-meeting-2026) at <span style="color: #14519a">TU Munich<span>, Germany, will be sponsored by [BASF](https://basf.com)!'
+    #- 'The [Snakemake hackathon 2026](https://indico.cern.ch/e/snakemake-meeting-2026) at <span style="color: #14519a">TU Munich<span>, Germany, will be sponsored by [BASF](https://basf.com)!'
   links:
-    - url: https://doi.org/10.12688/f1000research.29032.2
-      text: Read the paper
     - url: https://snakemake.readthedocs.io
       text: Read the docs
     - url: https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html
       text: Tutorial
+    - url: https://doi.org/10.12688/f1000research.29032.2
+      text: Read the paper
+    - url: https://snakemake.github.io/snakemake-plugin-catalog/index.html
+      text: Plugin catalog
     - url: https://snakemake.github.io/snakemake-workflow-catalog
       text: Workflow catalog
+    - url: https://github.com/sponsors/snakemake
+      text: Sponsor if you like
 
 features:
   - title: Readability and automation
