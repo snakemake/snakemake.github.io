@@ -29,6 +29,8 @@ header:
       url: https://fosstodon.org/@johanneskoester
     - text: Bluesky
       url: https://bsky.app/profile/johanneskoester.bsky.social
+    - text: Sponsor us
+      url: https://github.com/sponsors/snakemake
 
 hero:
   img:
@@ -47,12 +49,8 @@ hero:
       text: Tutorial
     - url: https://doi.org/10.12688/f1000research.29032.2
       text: Read the paper
-    - url: https://snakemake.github.io/snakemake-plugin-catalog/index.html
-      text: Plugin catalog
     - url: https://snakemake.github.io/snakemake-workflow-catalog
       text: Workflow catalog
-    - url: https://github.com/sponsors/snakemake
-      text: Sponsor if you like
 
 features:
   - title: Readability and automation
